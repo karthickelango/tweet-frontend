@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner'
 import OtherUsers from './OtherUsers';
 import ProfileFeeds from './ProfileFeeds';
 import DataContext from '../context/DataContext';
+import { BASE_URL, TWEET_URI } from '../constants/api_urls';
 
 const Account = () => {
   const {activeUser} = useContext(DataContext)
@@ -23,7 +24,7 @@ const Account = () => {
   const getBlogs = async () => {
     try {
       setIsLoading(true)
-      const response = await axios.get(`http://localhost:3001/${id}`)
+      const response = await axios.get(`${BASE_URL}/${activeUser}`)
       if (response.status >= 200 && response.status <= 299) {
         setBlog(response.data)
         setIsLoading(false)
@@ -37,7 +38,7 @@ const Account = () => {
   const getTweet= async () => {
     try {
       setIsLoading(true)
-      const response = await axios.get('http://localhost:3001/tweets')
+      const response = await axios.get(TWEET_URI)
       if (response.status >= 200 && response.status <= 299) {
         setTweet(response.data.data)
         setIsLoading(false)

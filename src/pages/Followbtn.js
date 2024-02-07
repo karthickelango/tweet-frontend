@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { FOLLOWER_URL, FOLLOWING_URI } from '../constants/api_urls'
 
 const Followbtn = ({ myId, followId, activeUser}) => {
     const [follow, setFollow] = useState([])
@@ -14,7 +15,7 @@ const Followbtn = ({ myId, followId, activeUser}) => {
     const handelFollow = async (followerId, followeeId) => {
         try {
             setIsLoading(true)
-            const users = await axios.post(`http://localhost:3001/follow/${followerId}/${followeeId}`)
+            const users = await axios.post(`${FOLLOWING_URI}/${followerId}/${followeeId}`)
             if (users.status >= 200 && users.status <= 299) {
                 setFollow(users.data.follower.followeeId)
                 localStorage.setItem('id', users.data.follower.followeeId)
@@ -30,7 +31,7 @@ const Followbtn = ({ myId, followId, activeUser}) => {
     const getUser = async () => {
         try {
             setIsLoading(true)
-            const users = await axios.get('http://localhost:3001/follower')
+            const users = await axios.get(FOLLOWER_URL)
             if (users.status >= 200 && users.status <= 299) {
                 setFollower(users.data.data)
                 setIsLoading(false)

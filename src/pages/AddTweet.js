@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import CancelBtn from '../components/CancelBtn'
 import DataContext from '../context/DataContext'
+import { BASE_URL, TWEET_URI } from '../constants/api_urls'
 
-const AddBooks = () => {
+const AddTweet = () => {
     const {activeUser} = useContext(DataContext)
     const [tweet, setTweet] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -21,7 +22,7 @@ const AddBooks = () => {
     // get active user
     const getUser = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/${activeUser}`) 
+            const response = await axios.get(`${BASE_URL}/${activeUser}`) 
             if (response.status >= 200 && response.status <= 299) {
                 setUserActive(response.data)
             }
@@ -38,7 +39,7 @@ const AddBooks = () => {
             user_id: userInfo
         }
         setIsLoading(true)
-        axios.post('http://localhost:3001/tweets', data).then(() => {
+        axios.post(TWEET_URI, data).then(() => {
             setIsLoading(false)
             navigate('/')
         }).catch((error) => {
@@ -47,9 +48,6 @@ const AddBooks = () => {
     }
     return (
         <div className='container' style={{maxWidth: "600px", margin: "0 auto"}}>
-            <div className='flex justify-between items-center'>
-                <h1 className='text-3xl my-8'>Write a tweet</h1>
-            </div>
             {
                 isLoading ?
                     <Spinner /> :
@@ -67,4 +65,4 @@ const AddBooks = () => {
     )
 }
 
-export default AddBooks
+export default AddTweet

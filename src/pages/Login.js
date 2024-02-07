@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import LogInImg from '../assets/images/blog_bg.svg'
 import Eye from '../assets/images/eye.svg'
+import { LOGIN_URI, REGISTER_URI } from '../constants/api_urls';
 
 
 export const Login = () => {
@@ -19,7 +20,7 @@ export const Login = () => {
   }, [])
 
   const fetchUrl = () => {
-    axios.get('http://localhost:3001/register').then((res) => {
+    axios.get(REGISTER_URI).then((res) => {
     })
   }
 
@@ -29,7 +30,7 @@ export const Login = () => {
         username: name,
         password: password
       }
-      const response = await axios.post('http://localhost:3001/login', user)
+      const response = await axios.post(LOGIN_URI, user)
       const token = response.data
       navigate('/')
       window.location.reload()
@@ -62,7 +63,7 @@ export const Login = () => {
                   userMsg ? <h1 className="py-4 text-color-primary text-center">User doesn't exist</h1> : <h1 className='py-4'></h1>
                 }
                 <div className="mb-4">
-                  <input type="text" placeholder='Email' className="form-control" id="username" value={name} onChange={(e) => setName(e.target.value)} />
+                  <input type="text" placeholder='username' className="form-control" id="username" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="mb-4 position-relative">
                   <input type={!showPassword ? "password" : "text"} placeholder='password' className="form-control" id="password" value={password} onChange={(e) => setPasword(e.target.value)} />

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { createContext, useEffect, useState } from "react";
+import { FOLLOWER_URL } from '../constants/api_urls';
 
 const DataContext = createContext({})
 export const DataProvider = ({ children }) => {
@@ -18,7 +19,6 @@ export const DataProvider = ({ children }) => {
     const [tweet, setTeeet] = useState([])
     const [follower, setFollower] = useState([])
 
-
     // useEffect
     useEffect(() => {
         getFollowers()
@@ -28,7 +28,7 @@ export const DataProvider = ({ children }) => {
     const getFollowers = async () => {
         try {
             setIsLoading(true)
-            const response = await axios.get('http://localhost:3001/follower')
+            const response = await axios.get(FOLLOWER_URL)
             if (response.status >= 200 && response.status <= 299) {
                 setFollower(response.data.data)
                 setIsLoading(false)

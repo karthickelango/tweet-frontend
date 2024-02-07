@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
 import DataContext from '../context/DataContext'
 import Followbtn from './Followbtn'
+import { BASE_URL, USER_LIST } from '../constants/api_urls'
 
 const Users = () => {
   const {activeUser, follower, setFollower} = useContext(DataContext)
@@ -24,7 +25,7 @@ const Users = () => {
   const getUserDetails = async () => {
     try {
       setIsLoading(true)
-      const response = await axios.get(`http://localhost:3001/${activeUser}`)
+      const response = await axios.get(`${BASE_URL}/${activeUser}`)
       if (response.status >= 200 && response.status <= 299) {
         setUserName(response.data)
         setIsLoading(false)
@@ -38,7 +39,7 @@ const Users = () => {
   const getUser = async () => {
     try {
       setIsLoading(true)
-      const users = await axios.get('http://localhost:3001/users')
+      const users = await axios.get(USER_LIST)
       if (users.status >= 200 && users.status <= 299) {
         setAllUser(users.data.auth)
         setIsLoading(false)

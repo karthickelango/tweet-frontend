@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import LogInImg from '../assets/images/blog_bg.svg'
+import { REGISTER_URI } from '../constants/api_urls';
 
 
 export const SignUp = () => {
@@ -20,7 +21,7 @@ export const SignUp = () => {
         }
         if (password === confirmPassword) {
             try {
-                const response = await axios.post('http://localhost:3001/register', newUser)
+                const response = await axios.post(REGISTER_URI, newUser)
                 if (response.status >= 200 && response.status <= 299) {
                     setEmail('')
                     setName('')

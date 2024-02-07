@@ -5,7 +5,7 @@ import { SignUp } from './pages/SignUp';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import './assets/styles/style.css'
-import AddBooks from './pages/AddBooks';
+import AddTweet from './pages/AddTweet';
 import Details from './pages/Details';
 import Users from './pages/Users';
 import Feeds from './pages/Feeds';
@@ -30,7 +30,7 @@ function App() {
                 <Route path='/feed' element={<Feeds />}></Route>
                 <Route path='/users' element={<Users />}></Route>
                 <Route path='/profile' element={<Account />}></Route>
-                <Route path='/addtweet' element={<AddBooks />}></Route>
+                <Route path='/addtweet' element={<AddTweet />}></Route>
                 <Route path='/:id' element={<Details />}></Route>
               </Routes>
             </>

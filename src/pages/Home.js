@@ -5,6 +5,7 @@ import Spinner from '../components/Spinner'
 import nopost from '../assets/images/no_post.svg'
 import Feed from './Feeds'
 import DataContext from '../context/DataContext'
+import { TWEET_URI } from '../constants/api_urls'
 
 
 
@@ -14,7 +15,6 @@ const Home = () => {
   const { activeUser, follower, setFollower } = useContext(DataContext)
   const [tweet, setTeeet] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-
   // useEffect
   useEffect(() => {
     getTweets()
@@ -24,7 +24,7 @@ const Home = () => {
   const getTweets = async () => {
     try {
       setIsLoading(true)
-      const response = await axios.get('http://localhost:3001/tweets')
+      const response = await axios.get(TWEET_URI)
       if (response.status >= 200 && response.status <= 299) {
         setTeeet(response.data.data)
         setIsLoading(false)
@@ -36,7 +36,7 @@ const Home = () => {
   }
 
   //filter followers
-  const findFollowers = follower.filter(obj => activeUser.includes(obj.followerId))
+  const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
   const myFollowers = findFollowers.map(obj => obj.followeeId)
 
   //filter post
@@ -50,7 +50,7 @@ const Home = () => {
           <div className='container' style={{ maxWidth: "600px", margin: "0 auto" }}>
             <ul role="list" className="divide-y divide-gray-100">
               {
-                tweet?.length > 0 ?
+                myTweet?.length > 0 ?
                   <>
                     <div className='text-start my-3'>
                       <Link to='/addtweet' className='btn primary-btn'>write</Link>
