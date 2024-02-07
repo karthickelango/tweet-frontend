@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { createContext, useEffect, useState } from "react";
 import { FOLLOWER_URL } from '../constants/api_urls';
+import { MYTWEET_URI } from '../constants/api_urls';
 
 const DataContext = createContext({})
 export const DataProvider = ({ children }) => {
@@ -18,6 +19,7 @@ export const DataProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [tweet, setTeeet] = useState([])
     const [follower, setFollower] = useState([])
+
 
     // useEffect
     useEffect(() => {
@@ -38,6 +40,7 @@ export const DataProvider = ({ children }) => {
             setIsLoading(false)
         }
     }
+    
     return (
         <DataContext.Provider value={{ activeUser, tweet, setIsLoading, isLoading, follower, setFollower }}>
             {children}

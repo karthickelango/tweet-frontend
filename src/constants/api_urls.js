@@ -8,3 +8,4 @@ export const TWEET_URI = BASE_URL + "/tweets";
 export const USER_LIST = BASE_URL + "/users";
 export const FOLLOWER_URL = BASE_URL + "/follower"
 export const FOLLOWING_URI = BASE_URL + "/follow"
+export const MYTWEET_URI = BASE_URL + "/mytweet"

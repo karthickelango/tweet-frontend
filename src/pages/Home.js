@@ -41,7 +41,7 @@ const Home = () => {
   // useEffect
   useEffect(() => {
     getTweets()
-  }, [activeUser])
+  }, [follower])
 
   return (
     <>

@@ -1,13 +1,16 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
 import { FOLLOWING_URI } from '../constants/api_urls'
+import { BASE_URL } from '../constants/api_urls'
+import { USER_LIST } from '../constants/api_urls'
+import DataContext from '../context/DataContext'
 
 
 
 const OtherUsers = ({ id }) => {
-  const userToken = localStorage.getItem('token')
+  const {activeUser} = useContext(DataContext)
   const [allUser, setAllUser] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [userName, setUserName] = useState('')
@@ -16,36 +19,13 @@ const OtherUsers = ({ id }) => {
 
   useEffect(() => {
     getUser()
-    getUserDetails()
-    setFollow(localStorage.getItem('id') || null)
   }, [])
 
-  function parseJwt(token) {
-    if (!token) { return; }
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-  }
-  const token = userToken;
-  const user = parseJwt(token)
-  const getUserDetails = async () => {
-    try {
-      setIsLoading(true)
-      const response = await axios.get(`https://tweetbackend-5owf.onrender.com/${user.userId}`)
-      if (response.status >= 200 && response.status <= 299) {
-        setUserName(response.data)
-        setIsLoading(false)
-      }
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false)
-    }
-  }
   // get user details
   const getUser = async () => {
     try {
       setIsLoading(true)
-      const users = await axios.get('https://tweetbackend-5owf.onrender.com/users')
+      const users = await axios.get(USER_LIST)
       if (users.status >= 200 && users.status <= 299) {
         setAllUser(users.data.auth)
         setIsLoading(false)
@@ -66,7 +46,6 @@ const OtherUsers = ({ id }) => {
       const users = await axios.post(`${FOLLOWING_URI}/${followerId}/${followeeId}`)
       if (users.status >= 200 && users.status <= 299) {
         setFollow(users.data.follower.followeeId)
-        localStorage.setItem('id', users.data.follower.followeeId)
         setIsLoading(false)
         console.log(users)
       }
@@ -93,7 +72,7 @@ const OtherUsers = ({ id }) => {
                     </div>
                   </div>
                   <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <div onClick={() => handelFollow(userName._id, user._id)} className='btn primary-btn'>Follow</div>
+                    <div onClick={() => handelFollow(activeUser, user._id)} className='btn primary-btn disabled'>Follow</div>
                   </div>
                 </li>
               ))}
