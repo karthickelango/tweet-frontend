@@ -1,0 +1,194 @@
+body {}
+
+.mt-30 {
+    margin-top: 50px;
+}
+
+.align-content-center1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.h-80 {
+    height: 80vh;
+}
+
+.label-item {
+    font-size: 14px;
+}
+
+.login-link {
+    color: #0d6efd;
+}
+
+.primary-btn {
+    color: #fff !important;
+    background-color: #ff748d !important;
+    padding: 3px 15px;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.secondary-btn {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #c6c6c6 !important;
+    padding: 3px 15px;
+}
+
+.text-color-primary {
+    color: #ff748d;
+}
+
+.fill-blue-600 {
+    fill: #ff748d;
+}
+
+.b-logo {
+    color: #ff748d;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.title {
+    color: #576269;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 50px !important;
+}
+
+.title-secondary {
+    color: #576269;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card-title {
+    color: #576269;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card-text {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input {
+    background-color: #f9f9f9 !important;
+    border: none !important;
+}
+
+input.form-control {
+    font-size: 12px;
+    color: #000;
+    padding: 15px 15px;
+}
+
+.jc-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-30 {
+    padding: 5px 30px;
+}
+
+.title.mb-0 {
+    margin-bottom: 0px !important;
+}
+
+.error-msg {
+    position: absolute;
+    top: 50px;
+}
+
+.nav-item .nav-link {
+    color: #576269;
+}
+
+.user-image {
+    width: 50px;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+.card {
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+}
+
+.time-text {
+    position: absolute;
+    right: 15px;
+}
+
+.btn-follow {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+
+.w-100 {
+    width: 140px !important;
+    display: inline-block;
+}
+
+.bt-1 {
+    border-top: 1px solid #ccc;
+}
+
+.tabnav.active {
+    border-top: 3px solid #ff748d;
+}
+
+button.tabnav {
+    border-top: 3px solid #fff;
+}
+
+.read-more {
+    position: absolute;
+    bottom: 5px;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.cardStyle {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px 15px !important;
+    border-radius: 10px;
+}
+
+nav a.active.nav-item .nav-link {
+    color: #ff748d;
+}
+.profile-page .w-12 {
+    width: 6rem;
+}
+.profile-page .h-12 {
+    height: 6rem;
+}
+.profile-page .leading-6 {
+    line-height: 3.5rem;
+}
+.profile-page .text-sm {
+    font-size: 20px;
+}
+.profile-page .text-xs {
+    font-size: 16px;
+}
+.eye-icon {
+    width: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+}

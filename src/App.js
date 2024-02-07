@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import { Login } from './pages/Login';
+import { SignUp } from './pages/SignUp';
+import Account from './pages/Account';
+import Navbar from './components/Navbar';
+import './assets/styles/style.css'
+import AddBooks from './pages/AddBooks';
+import Details from './pages/Details';
+import Users from './pages/Users';
+import Feeds from './pages/Feeds';
+import { DataProvider } from './context/DataContext';
 
 function App() {
+  const isUserSignedIn = !!localStorage.getItem('token')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DataProvider>
+        {
+          !isUserSignedIn ?
+            <Routes>
+              <Route path='/' element={<Login />}></Route>
+              <Route path='/signup' element={<SignUp />}></Route>
+            </Routes>
+            :
+            <>
+              <Navbar />
+              <Routes>
+                <Route path='/' element={<Home />}></Route>
+                <Route path='/feed' element={<Feeds />}></Route>
+                <Route path='/users' element={<Users />}></Route>
+                <Route path='/profile' element={<Account />}></Route>
+                <Route path='/addtweet' element={<AddBooks />}></Route>
+                <Route path='/:id' element={<Details />}></Route>
+              </Routes>
+            </>
+        }
+      </DataProvider>
     </div>
   );
 }
+
+
 
 export default App;
