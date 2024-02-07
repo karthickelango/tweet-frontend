@@ -15,11 +15,6 @@ const Home = () => {
   const { activeUser, follower, setFollower } = useContext(DataContext)
   const [tweet, setTeeet] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  // useEffect
-  useEffect(() => {
-    getTweets()
-  }, [])
-
   // get tweet list
   const getTweets = async () => {
     try {
@@ -42,6 +37,11 @@ const Home = () => {
   //filter post
   const value = [activeUser, myFollowers].flatMap(x => x)
   const myTweet = tweet.filter(obj => value.includes(obj.user_id));
+
+  // useEffect
+  useEffect(() => {
+    getTweets()
+  }, [activeUser])
 
   return (
     <>

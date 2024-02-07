@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
 import DataContext from '../context/DataContext'
 import Followbtn from './Followbtn'
-import { BASE_URL, USER_LIST } from '../constants/api_urls'
+import { BASE_URL } from '../constants/api_urls'
+import { USER_LIST } from '../constants/api_urls'
 
 const Users = () => {
   const {activeUser, follower, setFollower} = useContext(DataContext)

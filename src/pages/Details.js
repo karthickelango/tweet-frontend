@@ -24,7 +24,7 @@ const Account = () => {
   const getBlogs = async () => {
     try {
       setIsLoading(true)
-      const response = await axios.get(`${BASE_URL}/${activeUser}`)
+      const response = await axios.get(`${BASE_URL}/${id}`)
       if (response.status >= 200 && response.status <= 299) {
         setBlog(response.data)
         setIsLoading(false)
@@ -49,8 +49,7 @@ const Account = () => {
     }
   }
 
-  const my_blog = tweet.filter((x) => x.user_id.includes(activeUser))
-
+  const my_blog = tweet.filter((x) => x.user_id.includes(id))
 
   return (
     <>

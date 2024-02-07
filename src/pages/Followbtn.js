@@ -10,7 +10,7 @@ const Followbtn = ({ myId, followId, activeUser}) => {
 
     useEffect(() => {
         getUser()
-    }, [followId])
+    }, [])
     // handel follow
     const handelFollow = async (followerId, followeeId) => {
         try {
@@ -27,7 +27,7 @@ const Followbtn = ({ myId, followId, activeUser}) => {
             setIsLoading(false)
         }
     }
-    // get user details
+    // get follow details
     const getUser = async () => {
         try {
             setIsLoading(true)
