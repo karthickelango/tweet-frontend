@@ -81,6 +81,7 @@ const Account = () => {
   const value = [myFollowers].flatMap(x => x)
   const myfollow = allUser.filter(obj => !value.includes(obj._id));  
   const myfollowing = allUser.filter(obj => value.includes(obj._id));  
+  console.log(myfollow)
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
   useEffect(() => {
