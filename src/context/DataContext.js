@@ -20,26 +20,6 @@ export const DataProvider = ({ children }) => {
     const [tweet, setTeeet] = useState([])
     const [follower, setFollower] = useState([])
 
-
-    // useEffect
-    useEffect(() => {
-        getFollowers()
-    }, [])
-
-    // get follower list
-    const getFollowers = async () => {
-        try {
-            setIsLoading(true)
-            const response = await axios.get(FOLLOWER_URL)
-            if (response.status >= 200 && response.status <= 299) {
-                setFollower(response.data.data)
-                setIsLoading(false)
-            }
-        } catch (error) {
-            console.log(error)
-            setIsLoading(false)
-        }
-    }
     
     return (
         <DataContext.Provider value={{ activeUser, tweet, setIsLoading, isLoading, follower, setFollower }}>
