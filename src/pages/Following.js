@@ -1,64 +1,11 @@
-import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
-import DataContext from '../context/DataContext'
-import Followbtn from './Followbtn'
-import { BASE_URL } from '../constants/api_urls'
-import { USER_LIST } from '../constants/api_urls'
 
-const Following = ({onUpdateLen}) => {
-  const {activeUser, follower, setFollower} = useContext(DataContext)
-  const [allUser, setAllUser] = useState([])
+const Following = ({myfollowing, activeUser}) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [userName, setUserName] = useState('')
-  const [follow, setFollow] = useState([])
 
- // get user details
-  const getUserDetails = async () => {
-    try {
-      setIsLoading(true)
-      const response = await axios.get(`${BASE_URL}/${activeUser}`)
-      if (response.status >= 200 && response.status <= 299) {
-        setUserName(response.data)
-        setIsLoading(false)
-      }
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false)
-    }
-  }
-  // get user details
-  const getUser = async () => {
-    try {
-      setIsLoading(true)
-      const users = await axios.get(USER_LIST)
-      if (users.status >= 200 && users.status <= 299) {
-        setAllUser(users.data.auth)
-        setIsLoading(false)
-      }
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false)
-    }
-  }
-  //filter user
-  const otherUsers = allUser.filter(e => e._id === activeUser);
-  otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === activeUser), 1));
-
-  
-  const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
-  const myFollowers = findFollowers?.map(obj => obj.followeeId)
-  const value = [myFollowers].flatMap(x => x)
-  const myfollow = allUser.filter(obj => value.includes(obj._id));
-
-  // useEffect
-  useEffect(() => {
-    getUser()
-    getUserDetails()
-    onUpdateLen(myfollow?.length) 
-  }, [])
     return (
     <>
       {
@@ -66,9 +13,9 @@ const Following = ({onUpdateLen}) => {
           <>
             <div className='container' style={{ maxWidth: "600px", margin: "0 auto" }}>
               {
-                myfollow.length > 0 ?
+                myfollowing.length > 0 ?
                   <ul role="list" className="divide-y divide-gray-100">
-                    {myfollow?.map((user, index) => (
+                    {myfollowing?.map((user, index) => (
                       <li className="flex justify-between gap-x-6 py-5" key={index}>
                         <div className="flex min-w-0 gap-x-4">
                           <Link to={`/${user._id}`}>

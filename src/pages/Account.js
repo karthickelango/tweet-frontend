@@ -80,6 +80,7 @@ const Account = () => {
   const myFollowers = findFollowers?.map(obj => obj.followeeId)
   const value = [myFollowers].flatMap(x => x)
   const myfollow = allUser.filter(obj => !value.includes(obj._id));  
+  const myfollowing = allUser.filter(obj => value.includes(obj._id));  
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
   useEffect(() => {
@@ -102,7 +103,7 @@ const Account = () => {
                     <p className="text-sm font-semibold leading-6 text-gray-900">{userName?.username}</p>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.length} </span>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {myfollow.length} </span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {followingcount}</span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {myfollowing.length}</span>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -139,10 +140,10 @@ const Account = () => {
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <Follower onUpdateLength={followerLength} />
+                <Follower myfollow={myfollow} activeUser={activeUser}/>
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <Following onUpdateLen={followingLength} />
+                <Following myfollowing={myfollowing} activeUser={activeUser}/>
               </div>
             </div>
           </div>

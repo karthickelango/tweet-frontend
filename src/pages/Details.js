@@ -7,18 +7,20 @@ import Spinner from '../components/Spinner'
 import OtherUsers from './OtherUsers';
 import ProfileFeeds from './ProfileFeeds';
 import DataContext from '../context/DataContext';
-import { BASE_URL, TWEET_URI } from '../constants/api_urls';
+import { BASE_URL, TWEET_URI, USER_LIST } from '../constants/api_urls';
 import OtherFollower from './OtherFollower';
 import OtherFollowing from './OtherFollowing';
 
 const Account = () => {
-  const { activeUser } = useContext(DataContext)
+  const { activeUser, follower } = useContext(DataContext)
   const [blog, setBlog] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [tweet, setTweet] = useState([])
   const { id } = useParams()
   const [followercount, setFollowerCount] = useState(0)
   const [followingcount, setFollowingCount] = useState(0)
+  const [allUser, setAllUser] = useState([])
+
 
   const getBlogs = async () => {
     try {
@@ -47,21 +49,38 @@ const Account = () => {
       setIsLoading(false)
     }
   }
-  const followerLength = (newLength) => {
-    setFollowerCount(newLength);
-  };
-  const followingLength = (newLength) => {
-    setFollowingCount(newLength);
-  };
+  // get user details
+  const getUser = async () => {
+    try {
+      setIsLoading(true)
+      const users = await axios.get(USER_LIST)
+      if (users.status >= 200 && users.status <= 299) {
+        setAllUser(users.data.auth)
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
+  }
+  //filter user
+  const otherUsers = allUser.filter(e => e._id === id);
+  otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === id), 1));
+  const findFollowers = follower.filter(obj => id?.includes(obj.followerId))
+  const myFollowers = findFollowers?.map(obj => obj.followeeId)
+  const value = [myFollowers].flatMap(x => x)
+  const myfollow = allUser.filter(obj => !value.includes(obj._id));
+  const myfollowing = allUser.filter(obj => value.includes(obj._id));
+
+  
+
   const my_blog = tweet.filter((x) => x.user_id.includes(id))
 
   useEffect(() => {
     getBlogs()
     getTweet()
-    followerLength()
-    followingLength()
+    getUser()
   }, [id])
-  console.log(followercount)
 
   return (
     <>
@@ -75,8 +94,8 @@ const Account = () => {
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm font-semibold leading-6 text-gray-900">{blog.username}</p>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.length}</span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {followercount}</span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {followingcount}</span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {myfollow.length}</span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {myfollowing.length}</span>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -113,10 +132,10 @@ const Account = () => {
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <OtherFollower id={id} onUpdateLength={followerLength} />
+                <OtherFollower myfollow={myfollow}  activeUser={activeUser}/>
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <OtherFollowing id={id} onUpdateLength={followingLength} />
+                <OtherFollowing myfollowing={myfollowing}  activeUser={activeUser}/>
               </div>
             </div>
           </div>
