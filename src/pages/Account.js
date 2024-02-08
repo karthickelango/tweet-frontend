@@ -6,21 +6,21 @@ import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner'
 import DataContext from '../context/DataContext';
 import ProfileFeeds from './ProfileFeeds';
-import { BASE_URL, TWEET_URI } from '../constants/api_urls';
+import { BASE_URL, TWEET_URI, USER_LIST } from '../constants/api_urls';
+import Following from './Following';
+import Follower from './Follower';
 
 
 const Account = () => {
-  const {activeUser} = useContext(DataContext)
+  const { activeUser, follower } = useContext(DataContext)
   const [userName, setUserName] = useState('')
   const [blog, setBlog] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [followercount, setFollowerCount] = useState(0)
+  const [followingcount, setFollowingCount] = useState(0)
+  const [allUser, setAllUser] = useState([])
 
-  useEffect(() => {
-    getUserDetails()
-    getTweet()
-  }, [])
-
-// get user detail
+  // get user detail
   const getUserDetails = async () => {
     try {
       setIsLoading(true)
@@ -35,7 +35,7 @@ const Account = () => {
     }
   }
 
-// get tewwt
+  // get tewwt
   const getTweet = async () => {
     try {
       setIsLoading(true)
@@ -49,10 +49,46 @@ const Account = () => {
       setIsLoading(false)
     }
   }
+  const followerLength = (newLength) => {
+    setFollowerCount(newLength);
+  };
+  const followingLength = (newLength) => {
+    setFollowingCount(newLength);
 
+  };
+
+  // get user details
+  const getUser = async () => {
+    try {
+      setIsLoading(true)
+      const users = await axios.get(USER_LIST)
+      if (users.status >= 200 && users.status <= 299) {
+        setAllUser(users.data.auth)
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
+  }
+  //filter user
+  const otherUsers = allUser.filter(e => e._id === activeUser);
+  otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === activeUser), 1));
+
+  
+  const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
+  const myFollowers = findFollowers?.map(obj => obj.followeeId)
+  const value = [myFollowers].flatMap(x => x)
+  const myfollow = allUser.filter(obj => !value.includes(obj._id));  
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
-
+  useEffect(() => {
+    getUserDetails()
+    getTweet()
+    getUser()
+    followingLength()
+    followerLength()
+  }, [])
   return (
     <>
       {
@@ -65,8 +101,8 @@ const Account = () => {
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm font-semibold leading-6 text-gray-900">{userName?.username}</p>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.length} </span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: </span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: </span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {myfollow.length} </span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {followingcount}</span>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -87,18 +123,26 @@ const Account = () => {
             <div className="tab-content" id="pills-tabContent">
               <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <ul role="list" className="divide-y divide-gray-100">
-                {
-                  my_blog.map((post, index) => (
-                    <ProfileFeeds id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
-                  ))
-                }
+                  {
+                    my_blog.length > 0 ?
+                      <>
+                        {
+                          my_blog.map((post, index) => (
+                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
+                          ))
+                        }
+                      </> :
+                      <div className='text-center'>
+                        <h3 className='my-3 title-secondary mb-0'>No tweet to show</h3>
+                      </div>
+                  }
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <Users />
+                <Follower onUpdateLength={followerLength} />
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <Users />
+                <Following onUpdateLen={followingLength} />
               </div>
             </div>
           </div>

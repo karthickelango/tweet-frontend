@@ -72,7 +72,7 @@ const OtherUsers = ({ id }) => {
                     </div>
                   </div>
                   <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <div onClick={() => handelFollow(activeUser, user._id)} className='btn primary-btn disabled'>Follow</div>
+                    <div onClick={() => handelFollow(activeUser, user._id)} className='btn primary-btn'>Follow</div>
                   </div>
                 </li>
               ))}

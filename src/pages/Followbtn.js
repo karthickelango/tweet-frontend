@@ -18,8 +18,8 @@ const Followbtn = ({ myId, followId, activeUser}) => {
             const users = await axios.post(`${FOLLOWING_URI}/${followerId}/${followeeId}`)
             if (users.status >= 200 && users.status <= 299) {
                 setFollow(users.data.follower.followeeId)
-                localStorage.setItem('id', users.data.follower.followeeId)
                 setIsLoading(false)
+                getUser()
                 console.log(users)
             }
         } catch (error) {
@@ -46,6 +46,7 @@ const Followbtn = ({ myId, followId, activeUser}) => {
     const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
     const myFollowers = findFollowers?.map(obj => obj.followeeId)
     const foundFollower = myFollowers.find(element => element === followId);
+    
     return (
         <>
             {

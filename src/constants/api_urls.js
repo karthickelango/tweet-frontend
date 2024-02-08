@@ -1,5 +1,5 @@
-export const LOCAL_URL = "http://localhost:8000"
-export const BASE_URL = "https://tweetbackend-5owf.onrender.com"
+export const BASE_URL = "http://localhost:3001"
+// export const BASE_URL = "https://tweetbackend-5owf.onrender.com"
 
 // ACCOUNT REGISTER AND LOGIN URI
 export const REGISTER_URI = BASE_URL + "/register";

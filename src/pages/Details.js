@@ -8,19 +8,18 @@ import OtherUsers from './OtherUsers';
 import ProfileFeeds from './ProfileFeeds';
 import DataContext from '../context/DataContext';
 import { BASE_URL, TWEET_URI } from '../constants/api_urls';
+import OtherFollower from './OtherFollower';
+import OtherFollowing from './OtherFollowing';
 
 const Account = () => {
-  const {activeUser} = useContext(DataContext)
+  const { activeUser } = useContext(DataContext)
   const [blog, setBlog] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [tweet, setTweet] = useState([])
   const { id } = useParams()
+  const [followercount, setFollowerCount] = useState(0)
+  const [followingcount, setFollowingCount] = useState(0)
 
-  useEffect(() => {
-    getBlogs()
-    getTweet()
-  }, [id])
-  
   const getBlogs = async () => {
     try {
       setIsLoading(true)
@@ -35,7 +34,7 @@ const Account = () => {
     }
   }
   // get tweet
-  const getTweet= async () => {
+  const getTweet = async () => {
     try {
       setIsLoading(true)
       const response = await axios.get(TWEET_URI)
@@ -48,8 +47,21 @@ const Account = () => {
       setIsLoading(false)
     }
   }
-
+  const followerLength = (newLength) => {
+    setFollowerCount(newLength);
+  };
+  const followingLength = (newLength) => {
+    setFollowingCount(newLength);
+  };
   const my_blog = tweet.filter((x) => x.user_id.includes(id))
+
+  useEffect(() => {
+    getBlogs()
+    getTweet()
+    followerLength()
+    followingLength()
+  }, [id])
+  console.log(followercount)
 
   return (
     <>
@@ -63,8 +75,8 @@ const Account = () => {
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm font-semibold leading-6 text-gray-900">{blog.username}</p>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.length}</span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: </span>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: </span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {followercount}</span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {followingcount}</span>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -85,18 +97,26 @@ const Account = () => {
             <div className="tab-content" id="pills-tabContent">
               <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <ul role="list" className="divide-y divide-gray-100">
-                {
-                  my_blog.map((post, index) => (
-                    <ProfileFeeds id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
-                  ))
-                }
+                  {
+                    my_blog.length > 0 ?
+                      <>
+                        {
+                          my_blog.map((post, index) => (
+                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
+                          ))
+                        }
+                      </> :
+                      <div className='text-center'>
+                        <h3 className='my-3 title-secondary mb-0'>No tweet to show</h3>
+                      </div>
+                  }
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <OtherUsers id={id}/>
+                <OtherFollower id={id} onUpdateLength={followerLength} />
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <OtherUsers id={id}/>
+                <OtherFollowing id={id} onUpdateLength={followingLength} />
               </div>
             </div>
           </div>
