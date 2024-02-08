@@ -33,15 +33,14 @@ const Home = () => {
   //filter followers
   const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
   const myFollowers = findFollowers.map(obj => obj.followeeId)
-
   //filter post
   const value = [activeUser, myFollowers].flatMap(x => x)
   const myTweet = tweet.filter(obj => value.includes(obj.user_id));
-
+  
   // useEffect
   useEffect(() => {
-    getTweets()
-  }, [follower])
+    getTweets() 
+  }, [])
 
   return (
     <>
