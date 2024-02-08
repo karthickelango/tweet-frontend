@@ -192,3 +192,6 @@ nav a.active.nav-item .nav-link {
     right: 0;
     margin: 15px;
 }
+.post-list.hidden {
+    display: none;
+}
