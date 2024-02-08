@@ -5,16 +5,18 @@ import Spinner from '../components/Spinner'
 import nopost from '../assets/images/no_post.svg'
 import Feed from './Feeds'
 import DataContext from '../context/DataContext'
-import { TWEET_URI } from '../constants/api_urls'
+import { FOLLOWER_URL, TWEET_URI } from '../constants/api_urls'
 
 
 
 
 const Home = () => {
   // get data from useContext
-  const { activeUser, follower, setFollower } = useContext(DataContext)
+  const { activeUser } = useContext(DataContext)
   const [tweet, setTeeet] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [follower, setFollower] = useState([])
+
   // get tweet list
   const getTweets = async () => {
     try {
@@ -29,6 +31,20 @@ const Home = () => {
       setIsLoading(false)
     }
   }
+  // get follower list
+  const getFollowers = async () => {
+    try {
+        setIsLoading(true)
+        const response = await axios.get(FOLLOWER_URL)
+        if (response.status >= 200 && response.status <= 299) {
+            setFollower(response.data.data)
+            setIsLoading(false)
+        }
+    } catch (error) {
+        console.log(error)
+        setIsLoading(false)
+    }
+}
 
   //filter followers
   const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
@@ -40,6 +56,7 @@ const Home = () => {
   // useEffect
   useEffect(() => {
     getTweets() 
+    getFollowers()
   }, [])
 
   return (
