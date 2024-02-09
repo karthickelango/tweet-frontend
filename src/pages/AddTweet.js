@@ -56,10 +56,10 @@ const AddTweet = () => {
                             <h1 className='text-3xl my-4'>Write a tweet</h1>
                         </div>
                         <div className='my-4'>
-                            <textarea type='text' placeholder='tweet...' value={tweet} onChange={(e) => setTweet(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                            <textarea type='text' placeholder='tweet...' value={tweet} onChange={(e) => setTweet(e.target.value)} style={{ height: "150px"}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                         <button className="btn primary-btn me-3" onClick={() => handelAddTweet()}>
-                            Save
+                            Send
                         </button>
                         <CancelBtn />
                     </>

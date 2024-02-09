@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FOLLOWER_URL, FOLLOWING_URI } from '../constants/api_urls'
 
-const Followbtn = ({ myId, followId, activeUser}) => {
+const Followbtn = ({ myId, followId, activeUser, allUser, status}) => {
     const [follow, setFollow] = useState([])
     const [follower, setFollower] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -46,7 +46,6 @@ const Followbtn = ({ myId, followId, activeUser}) => {
     const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
     const myFollowers = findFollowers?.map(obj => obj.followeeId)
     const foundFollower = myFollowers.find(element => element === followId);
-    
     return (
         <>
             {

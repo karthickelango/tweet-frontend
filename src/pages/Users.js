@@ -55,8 +55,6 @@ const Users = () => {
   otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === activeUser), 1));
 
   
-  
-
   return (
     <>
       {
@@ -76,7 +74,7 @@ const Users = () => {
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
                           </div>
                         </div>
-                        <Followbtn myId={userName._id} followId={user._id} activeUser={activeUser}/>
+                        <Followbtn myId={userName._id} followId={user._id} activeUser={activeUser} allUser={allUser}/>
                       </li>
                     ))}
                   </ul>

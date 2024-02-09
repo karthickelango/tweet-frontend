@@ -74,14 +74,11 @@ const Account = () => {
   //filter user
   const otherUsers = allUser.filter(e => e._id === activeUser);
   otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === activeUser), 1));
-
-  
   const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
   const myFollowers = findFollowers?.map(obj => obj.followeeId)
   const value = [myFollowers].flatMap(x => x)
   const myfollow = allUser.filter(obj => !value.includes(obj._id));  
   const myfollowing = allUser.filter(obj => value.includes(obj._id));  
-  console.log(myfollow)
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
   useEffect(() => {
