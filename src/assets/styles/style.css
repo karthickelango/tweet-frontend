@@ -195,3 +195,34 @@ nav a.active.nav-item .nav-link {
 .post-list.hidden {
     display: none;
 }
+.model-center-style {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.model-bg
+{
+    background-color: #888b93;
+    height: 100vh;
+}
+.edit-icon {
+    width: 20px;
+    height: 20px;
+}
+.option-icons {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+.message-style {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}

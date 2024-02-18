@@ -10,6 +10,8 @@ import Details from './pages/Details';
 import Users from './pages/Users';
 import Feeds from './pages/Feeds';
 import { DataProvider } from './context/DataContext';
+import EditTweet from './pages/EditTweet';
+import DeleteTweet from './pages/DeleteTweet';
 
 function App() {
   const isUserSignedIn = !!localStorage.getItem('token')
@@ -32,6 +34,8 @@ function App() {
                 <Route path='/profile' element={<Account />}></Route>
                 <Route path='/addtweet' element={<AddTweet />}></Route>
                 <Route path='/:id' element={<Details />}></Route>
+                <Route path="/tweet/edit/:id" element={<EditTweet />} />
+                <Route path="/tweet/delete/:id" element= {<DeleteTweet />} />
               </Routes>
             </>
         }

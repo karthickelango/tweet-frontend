@@ -1,14 +1,15 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Spinner from '../components/Spinner'
-import nopost from '../assets/images/no_post.svg'
+import DataContext from '../context/DataContext'
+import DeleteIocn from '../assets/images/delete.svg'
+import Edit from '../assets/images/edit.svg'
 
 
 
 
-const Feed = ({ name, tweet, created_on, user_id, id }) => {
+const Feed = ({ name, tweet, created_on, user_id, id, tweetId }) => {
   const [timeAgo, setTimeAgo] = useState('');
+  const { activeUser } = useContext(DataContext)
 
   useEffect(() => {
 
@@ -59,6 +60,15 @@ const Feed = ({ name, tweet, created_on, user_id, id }) => {
         </div>
         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
           <p className="mt-1 text-xs leading-5 text-gray-500"><time>{timeAgo}</time></p>
+        </div>
+        <div className='option-icons'>
+          {
+            activeUser === user_id ?
+              <>
+                <Link to={`/tweet/edit/${tweetId}`}><img src={Edit} className='edit-icon' /></Link>
+                <Link to={`/tweet/delete/${tweetId}`}><img src={DeleteIocn} className='edit-icon' /></Link>
+              </> : ''
+          }
         </div>
       </li>
     </>
