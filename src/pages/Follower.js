@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
 import Followbtn from './Followbtn'
 
-const Follower = ({myfollow, activeUser}) => {
+const Follower = ({ myfollow, activeUser, noImg }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   return (
@@ -26,18 +26,22 @@ const Follower = ({myfollow, activeUser}) => {
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
                           </div>
                         </div>
-                        <Followbtn myId={activeUser} followId={user._id} activeUser={activeUser}/>
+                        <Followbtn myId={activeUser} followId={user._id} activeUser={activeUser} />
                       </li>
                     ))}
                   </ul>
                   :
-                  <div className='text-center'>
-                    <img src={noUser} style={{ marginTop: "10%", width: "500px" }} />
-                    <h3 className='my-3 title-secondary mb-0'>No users to show</h3>
-                    <div className='my-3'>
-                      <Link to='/' className='btn secondary-btn'>Back to home</Link>
-                    </div>
-                  </div>
+                  <>
+                    { noImg &&
+                      <div className='text-center'>
+                        <img src={noUser} style={{ marginTop: "10%", width: "500px" }} />
+                        <h3 className='my-3 title-secondary mb-0'>No users to show</h3>
+                        <div className='my-3'>
+                          <Link to='/' className='btn secondary-btn'>Back to home</Link>
+                        </div>
+                      </div>
+                    }
+                  </>
               }
             </div>
           </>

@@ -138,10 +138,10 @@ const Account = () => {
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <Follower myfollow={myfollow} activeUser={activeUser}/>
+                <Follower myfollow={myfollow} activeUser={activeUser} noImg={true}/>
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <Following myfollowing={myfollowing} activeUser={activeUser}/>
+                <Following myfollowing={myfollowing} activeUser={activeUser} noImg={true}/>
               </div>
             </div>
           </div>
