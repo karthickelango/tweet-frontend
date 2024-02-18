@@ -60,13 +60,14 @@ const Users = () => {
   const value = [myFollowers].flatMap(x => x)
   const myfollow = allUser.filter(obj => !value.includes(obj._id));
   const myfollowing = allUser.filter(obj => value.includes(obj._id));
+  
   return (
     <>
       {
         isLoading ? <Spinner /> :
           <>
             <div className='container' style={{ maxWidth: "600px", margin: "0 auto" }}>
-              <Following myfollowing={myfollowing} activeUser={activeUser} noImg={false}/>
+              <Following myfollowing={myfollowing} activeUser={activeUser} noImg={false} follower={follower}/>
               <Follower myfollow={myfollow} activeUser={activeUser} noImg={false}/>
             </div>
           </>

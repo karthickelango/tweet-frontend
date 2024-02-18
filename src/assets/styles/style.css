@@ -208,8 +208,8 @@ nav a.active.nav-item .nav-link {
     height: 100vh;
 }
 .edit-icon {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }
 .option-icons {
     display: flex;
@@ -225,4 +225,7 @@ nav a.active.nav-item .nav-link {
     width: 80%;
     margin: 0 auto;
     margin-top: 20px;
+}
+.secondary-color {
+    color: #6b7280;
 }

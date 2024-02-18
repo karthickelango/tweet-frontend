@@ -1,11 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Spinner from '../components/Spinner'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
+import { FOLLOWING_URI } from '../constants/api_urls'
+import axios from 'axios'
 
-const Following = ({ myfollowing, activeUser, noImg }) => {
+const Following = ({ myfollowing, activeUser, noImg, follower }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const handelFollow = async (id) => {
+    try {
+      setIsLoading(true)
+      const response = await axios.delete(`${FOLLOWING_URI}/${id}`)
+      if (response.status >= 200 && response.status <= 299) {
+        navigate('/')
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const findFoll = myfollowing.map(obj => obj.followerList.filter(obj => activeUser?.includes(obj.followerId)))
+  // console.log(findFoll)
 
+
+  // console.log(findFoll)
   return (
     <>
       {
@@ -25,7 +44,9 @@ const Following = ({ myfollowing, activeUser, noImg }) => {
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
                           </div>
                         </div>
-                        <h2>following</h2>
+                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                          <div className='btn secondary-btn'>following</div>
+                        </div>
                       </li>
                     ))}
                   </ul>

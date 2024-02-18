@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FOLLOWER_URL, FOLLOWING_URI } from '../constants/api_urls'
 
-const Followbtn = ({ myId, followId, activeUser, allUser, status}) => {
+const Followbtn = ({ myId, followId, activeUser, allUser, status }) => {
     const [follow, setFollow] = useState([])
     const [follower, setFollower] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -49,7 +49,10 @@ const Followbtn = ({ myId, followId, activeUser, allUser, status}) => {
     return (
         <>
             {
-                foundFollower ? <h2>following</h2> :
+                foundFollower ?
+                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                        <div  className='btn secondary-btn'>following</div>
+                    </div> :
                     <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                         <div onClick={() => handelFollow(myId, followId)} className='btn primary-btn'>Follow</div>
                     </div>
