@@ -17,7 +17,7 @@ const Navbar = () => {
             <nav className="navbar bg-body-tertiary px-5">
                 <div className="container-fluid">
                     <Link to='/'>
-                        <h2 className='b-logo'>TweetX</h2>
+                        <h2 className='b-logo'>Tweet</h2>
                     </Link>
                     <ul className="nav justify-content-end">
                         {

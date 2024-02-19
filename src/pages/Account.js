@@ -127,7 +127,7 @@ const Account = () => {
                       <>
                         {
                           my_blog.map((post, index) => (
-                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
+                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} key={index}/>
                           ))
                         }
                       </> :

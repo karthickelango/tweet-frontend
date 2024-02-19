@@ -10,7 +10,6 @@ import Edit from '../assets/images/edit.svg'
 const Feed = ({ name, tweet, created_on, user_id, id, tweetId }) => {
   const [timeAgo, setTimeAgo] = useState('');
   const { activeUser } = useContext(DataContext)
-
   useEffect(() => {
 
     const calculateTimeAgo = () => {

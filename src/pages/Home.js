@@ -73,7 +73,7 @@ const Home = () => {
                     </div>
                     {
                       myTweet.map((post, index) => (
-                        <Feed id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id}/>
+                        <Feed id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index}/>
                       ))
                     }
                   </>

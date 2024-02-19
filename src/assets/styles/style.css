@@ -24,7 +24,7 @@ body {}
 
 .primary-btn {
     color: #fff !important;
-    background-color: #ff748d !important;
+    background-color: #0291D9 !important;
     padding: 3px 15px;
 }
 
@@ -41,15 +41,15 @@ body {}
 }
 
 .text-color-primary {
-    color: #ff748d;
+    color: #0291D9;
 }
 
 .fill-blue-600 {
-    fill: #ff748d;
+    fill: #0291D9;
 }
 
 .b-logo {
-    color: #ff748d;
+    color: #0291D9;
     font-weight: 600;
     font-size: 24px;
 }
@@ -144,7 +144,7 @@ input.form-control {
 }
 
 .tabnav.active {
-    border-top: 3px solid #ff748d;
+    border-top: 3px solid #0291D9;
 }
 
 button.tabnav {
@@ -167,7 +167,7 @@ button.tabnav {
 }
 
 nav a.active.nav-item .nav-link {
-    color: #ff748d;
+    color: #0291D9;
 }
 .profile-page .w-12 {
     width: 6rem;

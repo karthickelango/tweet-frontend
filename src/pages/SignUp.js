@@ -41,7 +41,7 @@ export const SignUp = () => {
             <div className='container mt-30'>
                 <div className="" style={{ maxWidth: '80%', margin: '0 auto', border: 'none' }}>
                     <div className="row g-0">
-                        <h2 className='b-logo'>TweetX</h2>
+                        <h2 className='b-logo'>Tweet</h2>
                         <div className='my-3 label-item'>
                             <Link to="/" className='btn secondary-btn p-30'>Login</Link>
                         </div>
