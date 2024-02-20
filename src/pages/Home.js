@@ -5,17 +5,18 @@ import Spinner from '../components/Spinner'
 import nopost from '../assets/images/no_post.svg'
 import Feed from './Feeds'
 import DataContext from '../context/DataContext'
-import { FOLLOWER_URL, TWEET_URI } from '../constants/api_urls'
+import { FOLLOWER_URL, MYTWEET_URI, TWEET_URI } from '../constants/api_urls'
 
 
 
 
 const Home = () => {
   // get data from useContext
-  const { activeUser } = useContext(DataContext)
+  const { activeUser, allUser } = useContext(DataContext)
   const [tweet, setTeeet] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [follower, setFollower] = useState([])
+  const [MyTweet, setMyTweet] = useState([])
 
   // get tweet list
   const getTweets = async () => {
@@ -46,19 +47,35 @@ const Home = () => {
     }
 }
 
+const getMytweet = async () => {
+  try {
+      setIsLoading(true)
+      const response = await axios.get(MYTWEET_URI)
+      if (response.status >= 200 && response.status <= 299) {
+          setMyTweet(response.data.data)
+          setIsLoading(false)
+      }
+  } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+  }
+}
+
   //filter followers
   const findFollowers = follower.filter(obj => activeUser?.includes(obj.followerId))
   const myFollowers = findFollowers.map(obj => obj.followeeId)
   //filter post
   const value = [activeUser, myFollowers].flatMap(x => x)
-  const myTweet = tweet.filter(obj => value.includes(obj.user_id));
-  
+  // const myTweet = tweet.filter(obj => value.includes(obj.user_id));
+  // const photo = allUser.filter(obj => value.includes(obj._id));
+  const myTweet = MyTweet.filter(obj => value.includes(obj._id));
+
   // useEffect
   useEffect(() => {
     getTweets() 
     getFollowers()
+    getMytweet()
   }, [])
-
   return (
     <>
       {
@@ -71,9 +88,14 @@ const Home = () => {
                     <div className='text-start my-3'>
                       <Link to='/addtweet' className='btn primary-btn'>write</Link>
                     </div>
-                    {
+                    {/* {
                       myTweet.map((post, index) => (
                         <Feed id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index}/>
+                      ))
+                    } */}
+                    {
+                      myTweet.map((post, index) => (
+                        <Feed id={index} post={post.myTweet} name={post.username} avatar={post.avatar} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index}/>
                       ))
                     }
                   </>

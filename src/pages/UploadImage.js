@@ -83,10 +83,10 @@ const UploadImage = ({ activeUser }) => {
                                             </svg>
                                             <span className="sr-only">Close modal</span>
                                         </button>
-                                        <div className="p-6 text-center">
-                                            <h3 className="text-lg font-normal text-gray-500 dark:text-gray-400">
+                                        <div className="p-6 text-center" >
+                                            <h3 className="text-lg font-normal text-gray-500 dark:text-gray-400 image-container" >
                                                 <label for="upload">
-                                                    <img src={Upload} style={{ width: "350px" }} />
+                                                    <img src={Upload}/>
                                                     <input type='file' id='upload' onChange={(e) => setFile(e.target.files[0])} style={{ display: 'none' }} />
                                                 </label>
                                             </h3>

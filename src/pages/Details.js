@@ -7,9 +7,12 @@ import Spinner from '../components/Spinner'
 import OtherUsers from './OtherUsers';
 import ProfileFeeds from './ProfileFeeds';
 import DataContext from '../context/DataContext';
-import { BASE_URL, TWEET_URI, USER_LIST } from '../constants/api_urls';
+import { BASE_URL, MYTWEET_URI, TWEET_URI, USER_LIST } from '../constants/api_urls';
 import OtherFollower from './OtherFollower';
 import OtherFollowing from './OtherFollowing';
+import OtherFeeds from './OtherFeeds';
+import deImg from '../assets/images/user-profile.svg'
+
 
 const Account = () => {
   const { activeUser, follower } = useContext(DataContext)
@@ -20,6 +23,8 @@ const Account = () => {
   const [followercount, setFollowerCount] = useState(0)
   const [followingcount, setFollowingCount] = useState(0)
   const [allUser, setAllUser] = useState([])
+  const [MyTweet, setMyTweet] = useState([])
+
 
 
   const getBlogs = async () => {
@@ -63,6 +68,20 @@ const Account = () => {
       setIsLoading(false)
     }
   }
+
+  const getMytweet = async () => {
+    try {
+        setIsLoading(true)
+        const response = await axios.get(MYTWEET_URI)
+        if (response.status >= 200 && response.status <= 299) {
+            setMyTweet(response.data.data)
+            setIsLoading(false)
+        }
+    } catch (error) {
+        console.log(error)
+        setIsLoading(false)
+    }
+  }
   //filter user
   const otherUsers = allUser.filter(e => e._id === id);
   otherUsers.forEach(f => allUser.splice(allUser.findIndex(e => e._id === id), 1));
@@ -71,12 +90,13 @@ const Account = () => {
   const value = [myFollowers].flatMap(x => x)
   const myfollow = allUser.filter(obj => !value.includes(obj._id));
   const myfollowing = allUser.filter(obj => value.includes(obj._id));
-  const my_blog = tweet.filter((x) => x.user_id.includes(id))
-
+  const my_blog = MyTweet.filter((x) => x._id.includes(id))
+  const userImg = my_blog.map(x => x.avatar)
   useEffect(() => {
     getBlogs()
     getTweet()
     getUser()
+    getMytweet()
   }, [id])
 
   return (
@@ -86,11 +106,11 @@ const Account = () => {
           <div className='container' style={{ maxWidth: "600px", margin: "0 auto" }}>
             <ul role="list" className="divide-y divide-gray-100 profile-page">
               <li className="flex justify-between gap-x-6 pt-5 pb-2">
-                <div className="flex min-w-0 gap-x-4">
-                  <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <div className="flex min-w-0 gap-x-4 profile-img">
+                  <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={userImg[0] === null ? deImg : `${BASE_URL}/${userImg}`} alt="" />
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm font-semibold leading-6 text-gray-900">{blog.username}</p>
-                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.length}</span>
+                    <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Post: {my_blog.map(x => x.myTweet.length)}</span>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Followers: {myfollow.length}</span>
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {myfollowing.length}</span>
                   </div>
@@ -113,19 +133,11 @@ const Account = () => {
             <div className="tab-content" id="pills-tabContent">
               <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <ul role="list" className="divide-y divide-gray-100">
-                  {
-                    my_blog.length > 0 ?
-                      <>
                         {
                           my_blog.map((post, index) => (
-                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} />
+                            <OtherFeeds post={post.myTweet} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} userImg={post.avatar}/>
                           ))
                         }
-                      </> :
-                      <div className='text-center'>
-                        <h3 className='my-3 title-secondary mb-0'>No tweet to show</h3>
-                      </div>
-                  }
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">

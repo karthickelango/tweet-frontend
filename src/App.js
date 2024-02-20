@@ -4,7 +4,7 @@ import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
-import './assets/styles/style.css'
+import './assets/styles/style.scss'
 import AddTweet from './pages/AddTweet';
 import Details from './pages/Details';
 import Users from './pages/Users';
