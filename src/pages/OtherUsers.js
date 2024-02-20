@@ -47,7 +47,6 @@ const OtherUsers = ({ id }) => {
       if (users.status >= 200 && users.status <= 299) {
         setFollow(users.data.follower.followeeId)
         setIsLoading(false)
-        console.log(users)
       }
     } catch (error) {
       console.log(error)

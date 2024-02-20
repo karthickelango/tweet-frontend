@@ -12,7 +12,6 @@ import OtherUserFeeds from './OtherUserFeeds'
 
 const OtherFeeds = ({ created_on, userImg, post }) => {
   const [timeAgo, setTimeAgo] = useState('');
-  console.log(post)
   useEffect(() => {
 
     const calculateTimeAgo = () => {

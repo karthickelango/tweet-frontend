@@ -21,7 +21,6 @@ const UploadImage = ({ activeUser }) => {
         formData.append('file', file)
         try {
             const response = await axios.put(`${UPLOAD_URI}/${activeUser}`, formData)
-            console.log(response)
         } catch (error) {
             console.log(error)
         }

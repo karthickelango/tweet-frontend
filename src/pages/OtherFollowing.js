@@ -7,6 +7,8 @@ import DataContext from '../context/DataContext'
 import Followbtn from './Followbtn'
 import { BASE_URL } from '../constants/api_urls'
 import { USER_LIST } from '../constants/api_urls'
+import deImg from '../assets/images/user-profile.svg'
+
 
 const OtherFollowing = ({ myfollowing, activeUser }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +26,7 @@ const OtherFollowing = ({ myfollowing, activeUser }) => {
                       <li className="flex justify-between gap-x-6 py-5" key={index}>
                         <div className="flex min-w-0 gap-x-4">
                           <Link to={`/${user._id}`}>
-                            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={user.avatar === null ? deImg : `${BASE_URL}/${user.avatar}`} alt="" />
                           </Link>                    <div className="min-w-0 flex-auto">
                             <p className="text-sm font-semibold leading-6 text-gray-900">{user.username}</p>
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
