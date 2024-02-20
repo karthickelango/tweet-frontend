@@ -169,21 +169,27 @@ button.tabnav {
 nav a.active.nav-item .nav-link {
     color: #0291D9;
 }
+
 .profile-page .w-12 {
     width: 6rem;
 }
+
 .profile-page .h-12 {
     height: 6rem;
 }
+
 .profile-page .leading-6 {
     line-height: 3.5rem;
 }
+
 .profile-page .text-sm {
     font-size: 20px;
 }
+
 .profile-page .text-xs {
     font-size: 16px;
 }
+
 .eye-icon {
     width: 20px;
     cursor: pointer;
@@ -192,9 +198,11 @@ nav a.active.nav-item .nav-link {
     right: 0;
     margin: 15px;
 }
+
 .post-list.hidden {
     display: none;
 }
+
 .model-center-style {
     margin: 0;
     position: absolute;
@@ -202,15 +210,17 @@ nav a.active.nav-item .nav-link {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.model-bg
-{
+
+.model-bg {
     background-color: #888b93;
     height: 100vh;
 }
+
 .edit-icon {
     width: 15px;
     height: 15px;
 }
+
 .option-icons {
     display: flex;
     gap: 10px;
@@ -218,6 +228,7 @@ nav a.active.nav-item .nav-link {
     top: 10px;
     right: 0px;
 }
+
 .message-style {
     padding: 15px;
     background-color: #f8f9fa;
@@ -226,6 +237,20 @@ nav a.active.nav-item .nav-link {
     margin: 0 auto;
     margin-top: 20px;
 }
+
 .secondary-color {
     color: #6b7280;
+}
+
+.profile-img img{
+    object-fit: cover;
+}
+.profile-img .camera-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.justify-content-sp {
+    display: flex;
+    justify-content: space-between;
 }
