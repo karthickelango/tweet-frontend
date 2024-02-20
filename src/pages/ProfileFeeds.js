@@ -51,7 +51,7 @@ const ProfileFeeds = ({ name, tweet, created_on, user_id, id, userImg }) => {
       <li className="flex justify-between gap-x-6 py-5 position-relative" key={id}>
         <div className="flex min-w-0 gap-x-4 profile-img">
           <Link to={`/${user_id}`}>
-            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={userImg === null ? deImg : `${BASE_URL}/${userImg}`} alt="" />
+            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={userImg[0] === null ? deImg : `${BASE_URL}/${userImg}`} alt="" />
           </Link>
           <div className="min-w-0 flex-auto">
             <p className="text-sm font-semibold leading-6 text-gray-900">{name}</p>
