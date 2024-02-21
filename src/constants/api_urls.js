@@ -1,5 +1,5 @@
-// export const BASE_URL = "http://localhost:3001"
-export const BASE_URL = "https://tweetbackend-5owf.onrender.com"
+export const BASE_URL = "http://localhost:3001"
+// export const BASE_URL = "https://tweetbackend-5owf.onrender.com"
 
 // ACCOUNT REGISTER AND LOGIN URI
 export const REGISTER_URI = BASE_URL + "/register";
@@ -11,3 +11,6 @@ export const FOLLOWING_URI = BASE_URL + "/follow"
 export const MYTWEET_URI = BASE_URL + "/mytweet"
 export const UPLOAD_URI = BASE_URL + "/upload"
 export const FEEDS_URI = BASE_URL + "/tweets/avatar"
+export const POSTIMAGE_URI = BASE_URL + "/tweets/upload"
+
+

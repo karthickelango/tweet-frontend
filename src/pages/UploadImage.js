@@ -27,7 +27,7 @@ const UploadImage = ({ activeUser }) => {
             }
         } catch (error) {
             console.log(error)
-        }
+        } 
     }
 
 

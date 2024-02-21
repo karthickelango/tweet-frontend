@@ -1,12 +1,9 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
 import noUser from '../assets/images/no_user.svg'
-import DataContext from '../context/DataContext'
 import Followbtn from './Followbtn'
 import { BASE_URL } from '../constants/api_urls'
-import { USER_LIST } from '../constants/api_urls'
 import deImg from '../assets/images/user-profile.svg'
 
 
@@ -23,7 +20,7 @@ const OtherFollower = ({myfollow, activeUser}) => {
                   <ul role="list" className="divide-y divide-gray-100">
                     {myfollow?.map((user, index) => (
                       <li className="flex justify-between gap-x-6 py-5" key={index}>
-                        <div className="flex min-w-0 gap-x-4">
+                        <div className="flex min-w-0 gap-x-4 profile-img">
                           <Link to={`/${user._id}`}>
                             <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={user.avatar === null ? deImg : `${BASE_URL}/${user.avatar}`} alt="" />
                           </Link>                    <div className="min-w-0 flex-auto">
