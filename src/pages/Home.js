@@ -75,8 +75,6 @@ const Home = () => {
     }
     return 0;
   }).reverse();
-
-
   return (
     <>
       {
@@ -87,11 +85,11 @@ const Home = () => {
                 myTweet?.length > 0 ?
                   <>
                     <div className='text-start my-3'>
-                      <Link to='/addtweet' className='btn primary-btn'>write</Link>
+                      <Link to='/addtweet' className='btn primary-btn'>Write</Link>
                     </div>
                     {
                       post.map((post, index) => (
-                        <Feed id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index} avatar={post.user}/>
+                        <Feed id={index} postImage={post.postImage} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index} avatar={post.user}/>
                       ))
                     }
                   </>

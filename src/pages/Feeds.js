@@ -7,7 +7,7 @@ import deImg from '../assets/images/user-profile.svg'
 import { BASE_URL } from '../constants/api_urls'
 import UserFeeds from './UserFeeds'
 
-const Feed = ({ avatar, name, tweet, created_on, user_id, id, tweetId }) => {
+const Feed = ({ avatar, name, tweet, created_on, user_id, id, tweetId, postImage }) => {
   const profileavatar = avatar.map(x => x.avatar)
   const [timeAgo, setTimeAgo] = useState('');
   const { activeUser } = useContext(DataContext)
@@ -48,7 +48,6 @@ const Feed = ({ avatar, name, tweet, created_on, user_id, id, tweetId }) => {
   return (
     <>
       <li className="flex justify-between gap-x-6 py-4 position-relative" key={id}>
-
         <div className="flex min-w-0 gap-x-4 profile-img">
           <Link to={`/${user_id}`}>
             <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={profileavatar[0] === null ? deImg : `${BASE_URL}/${profileavatar}`} alt="" />
@@ -76,6 +75,9 @@ const Feed = ({ avatar, name, tweet, created_on, user_id, id, tweetId }) => {
           }
         </div>
       </li>
+      <div className='post-image'>
+        <img src={`${BASE_URL}/${postImage}`} />
+      </div>
     </>
   )
 }
