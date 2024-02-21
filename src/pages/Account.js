@@ -73,6 +73,7 @@ const Account = () => {
   const myfollowing = allUser.filter(obj => value.includes(obj._id));
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
+  console.log(my_blog)
   useEffect(() => {
     getUserDetails()
     getTweet()
@@ -115,13 +116,13 @@ const Account = () => {
                 <ul role="list" className="divide-y divide-gray-100">
                   {
                     my_blog.length > 0 ?
-                      <>
+                    <div className='profile-page'>
                         {
                           my_blog.map((post, index) => (
-                            <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} key={index} userImg={userImg}/>
+                                <ProfileFeeds post={post} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} key={index} userImg={userImg} postImage={post.postImage} />
                           ))
                         }
-                      </> :
+                      </div> :
                       <div className='text-center'>
                         <h3 className='my-3 title-secondary mb-0'>No tweet to show</h3>
                       </div>
