@@ -11,6 +11,7 @@ import { BASE_URL } from '../constants/api_urls'
 
 
 const UserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar }) => {
+  
   const [timeAgo, setTimeAgo] = useState('');
   const { activeUser } = useContext(DataContext)
   useEffect(() => {
