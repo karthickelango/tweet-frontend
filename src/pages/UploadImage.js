@@ -21,6 +21,10 @@ const UploadImage = ({ activeUser }) => {
         formData.append('file', file)
         try {
             const response = await axios.put(`${UPLOAD_URI}/${activeUser}`, formData)
+            if (response.status >= 200 && response.status <= 299) {
+                setOpen(false)
+                window.location.reload();
+            }
         } catch (error) {
             console.log(error)
         }
@@ -40,10 +44,14 @@ const UploadImage = ({ activeUser }) => {
             setIsLoading(false)
         }
     }
-
+    const handelClose = () => {
+        setOpen(false)
+        setFile('')
+    } 
     useEffect(() => {
         getInfo()
     }, [])
+
     return (
         <>
             <span className='camera-icon' onClick={() => setOpen(!open)} >
@@ -76,7 +84,7 @@ const UploadImage = ({ activeUser }) => {
                             >
                                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
                                     <div className="bg-white">
-                                        <button onClick={() => setOpen(!open)} type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                        <button onClick={() => handelClose()} type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
                                             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                             </svg>
@@ -84,13 +92,18 @@ const UploadImage = ({ activeUser }) => {
                                         </button>
                                         <div className="p-6 text-center" >
                                             <h3 className="text-lg font-normal text-gray-500 dark:text-gray-400 image-container" >
-                                                <label for="upload">
-                                                    <img src={Upload}/>
+                                                <label htmlFor="upload">
+                                                    {
+                                                        file ?
+                                                            <img src={URL.createObjectURL(file)} />
+                                                            :
+                                                            <img src={Upload} />
+                                                    }
                                                     <input type='file' id='upload' onChange={(e) => setFile(e.target.files[0])} style={{ display: 'none' }} />
                                                 </label>
                                             </h3>
                                             <div className='justify-content-sp'>
-                                                <button onClick={() => setOpen(!open)} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 mr-2">Cancel</button>
+                                                <button onClick={() => handelClose()} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 mr-2">Cancel</button>
                                                 <button onClick={() => handelUpload()} data-modal-hide="popup-modal" type="button" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center btn primary-btn">
                                                     Upload
                                                 </button>
