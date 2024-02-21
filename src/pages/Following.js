@@ -10,23 +10,18 @@ import deImg from '../assets/images/user-profile.svg'
 const Following = ({ myfollowing, activeUser, noImg, follower }) => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const handelFollow = async (id) => {
+  const handelUnfollow = async (id) => {
     try {
       setIsLoading(true)
       const response = await axios.delete(`${FOLLOWING_URI}/${id}`)
       if (response.status >= 200 && response.status <= 299) {
-        navigate('/')
         setIsLoading(false)
+        window.location.reload();
       }
     } catch (error) {
       console.log(error)
     }
   }
-  const findFoll = myfollowing.map(obj => obj.followerList.filter(obj => activeUser?.includes(obj.followerId)))
-  // console.log(findFoll)
-
-
-  // console.log(findFoll)
 
   return (
     <>
@@ -47,9 +42,13 @@ const Following = ({ myfollowing, activeUser, noImg, follower }) => {
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
                           </div>
                         </div>
-                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                          <div className='btn secondary-btn'>following</div>
-                        </div>
+                        {
+                          user.followerList.filter(obj => activeUser.includes(obj.followerId)).map(x => (
+                            <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                              <div className='btn secondary-btn' onClick={() => handelUnfollow(x._id)}>following</div>
+                            </div>
+                          ))
+                        }
                       </li>
                     ))}
                   </ul>
