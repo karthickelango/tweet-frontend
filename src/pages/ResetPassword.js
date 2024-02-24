@@ -29,15 +29,14 @@ export const ResetPassword = () => {
       try {
         const response = await axios.put(`${RESET_PASSWORD_URI}/${id}`, update)
         if (response.status >= 200 && response.status <= 299) {
-          console.log(response.data)
-          console.log('hey')
+          navigate('/')
         }
       }
       catch (error) {
         console.log(error)
       }
     } else {
-      console.log('no')
+      setErrorMsg(true)
     }
   }
   useEffect(() => {
@@ -53,10 +52,7 @@ export const ResetPassword = () => {
               <div className="card-body">
                 <h3 className='my-3 title mb-0'>Enter new password</h3>
                 {
-                  userMsg ? <h1 className="py-4 text-color-primary text-center">Email sent successfully</h1> : <h1 className='py-4'></h1>
-                }
-                {
-                  errorMsg ? <h1 className="py-4 text-color-primary text-center">Enter valid email</h1> : ''
+                  errorMsg ? <h1 className="py-4 text-color-primary text-center">Password didnot match</h1> :  <h1 className='py-4'></h1>
                 }
                 <div className="mb-4">
                   <input type="text" placeholder='new password' className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
