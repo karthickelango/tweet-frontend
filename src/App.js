@@ -12,6 +12,8 @@ import Feeds from './pages/Feeds';
 import { DataProvider } from './context/DataContext';
 import EditTweet from './pages/EditTweet';
 import DeleteTweet from './pages/DeleteTweet';
+import { ForgetPassword } from './pages/ForgetPassword';
+import { ResetPassword } from './pages/ResetPassword';
 
 function App() {
   const isUserSignedIn = !!localStorage.getItem('token')
@@ -23,6 +25,8 @@ function App() {
             <Routes>
               <Route path='/' element={<Login />}></Route>
               <Route path='/signup' element={<SignUp />}></Route>
+              <Route path="/forgetpassword" element={<ForgetPassword />} />
+              <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
             </Routes>
             :
             <>
@@ -35,7 +39,7 @@ function App() {
                 <Route path='/addtweet' element={<AddTweet />}></Route>
                 <Route path='/:id' element={<Details />}></Route>
                 <Route path="/tweet/edit/:id" element={<EditTweet />} />
-                <Route path="/tweet/delete/:id" element= {<DeleteTweet />} />
+                <Route path="/tweet/delete/:id" element={<DeleteTweet />} />
               </Routes>
             </>
         }

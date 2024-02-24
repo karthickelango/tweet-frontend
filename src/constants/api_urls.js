@@ -12,5 +12,8 @@ export const MYTWEET_URI = BASE_URL + "/mytweet"
 export const UPLOAD_URI = BASE_URL + "/upload"
 export const FEEDS_URI = BASE_URL + "/tweets/avatar"
 export const POSTIMAGE_URI = BASE_URL + "/tweets/upload"
+export const FORGET_PASSWORD_URI = BASE_URL + "/forgot-password"
+export const RESET_PASSWORD_URI = BASE_URL + "/reset-password"
+
 
 

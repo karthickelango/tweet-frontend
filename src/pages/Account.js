@@ -73,7 +73,6 @@ const Account = () => {
   const myfollowing = allUser.filter(obj => value.includes(obj._id));
   //filter user tweet list
   const my_blog = blog.filter((x) => x.user_id.includes(activeUser))
-  console.log(my_blog)
   useEffect(() => {
     getUserDetails()
     getTweet()

@@ -174,26 +174,6 @@ nav a.active.nav-item .nav-link {
     color: #0291D9;
 }
 
-.profile-page .w-12 {
-    width: 6rem;
-}
-
-.profile-page .h-12 {
-    height: 6rem;
-}
-
-.profile-page .leading-6 {
-    line-height: 3.5rem;
-}
-
-.profile-page .text-sm {
-    font-size: 20px;
-}
-
-.profile-page .text-xs {
-    font-size: 16px;
-}
-
 .eye-icon {
     width: 20px;
     cursor: pointer;
@@ -289,12 +269,27 @@ nav a.active.nav-item .nav-link {
 .profile-page {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px 0px;
+    gap: 4px 0px;
     justify-content: space-between;
     align-items: center;
     .profile-page-img {
-        width: 170px;
-        height: 170px;
+        width: 190px;
+        height: 190px;
         object-fit: cover;
+    }
+    .w-12 {
+        width: 6rem;
+    }
+    .h-12 {
+        height: 6rem;
+    }
+    .leading-6 {
+        line-height: 3.5rem;
+    }
+    .text-sm {
+        font-size: 20px;
+    }
+    .text-xs {
+        font-size: 16px;
     }
 }

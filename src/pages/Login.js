@@ -53,9 +53,6 @@ export const Login = () => {
         <div className="" style={{ maxWidth: '80%', margin: '0 auto', border: 'none' }}>
           <div className="row g-0">
             <h2 className='b-logo'>Tweet</h2>
-            <div className='my-3 label-item'>
-              <Link to="/signup" className='btn secondary-btn p-30'>Create account</Link>
-            </div>
             <div className="col-md-4 align-content-center" style={{}}>
               <div className="card-body">
                 <h3 className='my-3 title mb-0'>Login</h3>
@@ -70,11 +67,15 @@ export const Login = () => {
                   {
                     passwordMsg ? <h1 className="text-color-primary error-msg">Invalid password</h1> : ""
                   }
-                  <img src={Eye} onClick={() => toggleState()} className='eye-icon'/>
+                  <img src={Eye} onClick={() => toggleState()} className='eye-icon' />
                 </div>
                 <div className='jc-sb'>
-                  <Link>Forgrt password?</Link>
+                  <Link to='/forgetpassword'>Forgrt password?</Link>
                   <button className='btn primary-btn text-center' onClick={() => handelLogin()}>Login</button>
+                </div>
+                <div className='my-3 label-item text-center'>
+                  Don't have a account ?
+                  <Link to="/signup" className='text-color-primary ps-2'>Create one</Link>
                 </div>
               </div>
             </div>

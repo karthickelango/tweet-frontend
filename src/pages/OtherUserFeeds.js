@@ -10,7 +10,7 @@ import { BASE_URL } from '../constants/api_urls'
 
 
 
-const OtherUserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar }) => {
+const OtherUserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar, postImage }) => {
   const [timeAgo, setTimeAgo] = useState('');
   const { activeUser } = useContext(DataContext)
   useEffect(() => {
@@ -50,7 +50,7 @@ const OtherUserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar 
 
   return (
     <>
-      <li className="flex justify-between gap-x-6 py-4 position-relative" key={id}>
+      {/* <li className="flex justify-between gap-x-6 py-4 position-relative" key={id}>
 
         <div className="flex min-w-0 gap-x-4 profile-img">
           <Link to={`/${user_id}`}>
@@ -78,7 +78,8 @@ const OtherUserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar 
               </> : ''
           }
         </div>
-      </li>
+      </li> */}
+      <img src={`${BASE_URL}/${postImage}`} className='profile-page-img' />
     </>
   )
 }

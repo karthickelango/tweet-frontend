@@ -71,15 +71,15 @@ const Account = () => {
 
   const getMytweet = async () => {
     try {
-        setIsLoading(true)
-        const response = await axios.get(MYTWEET_URI)
-        if (response.status >= 200 && response.status <= 299) {
-            setMyTweet(response.data.data)
-            setIsLoading(false)
-        }
-    } catch (error) {
-        console.log(error)
+      setIsLoading(true)
+      const response = await axios.get(MYTWEET_URI)
+      if (response.status >= 200 && response.status <= 299) {
+        setMyTweet(response.data.data)
         setIsLoading(false)
+      }
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
     }
   }
   //filter user
@@ -98,7 +98,6 @@ const Account = () => {
     getUser()
     getMytweet()
   }, [id])
-
   return (
     <>
       {
@@ -133,18 +132,18 @@ const Account = () => {
             <div className="tab-content" id="pills-tabContent">
               <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <ul role="list" className="divide-y divide-gray-100">
-                        {
-                          my_blog.map((post, index) => (
-                            <OtherFeeds post={post.myTweet} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} userImg={post.avatar}/>
-                          ))
-                        }
+                    {
+                      my_blog.map((post, index) => (
+                        <OtherFeeds post={post.myTweet} id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} userImg={post.avatar} postImage={post.postImage} />
+                      ))
+                    }
                 </ul>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <OtherFollower myfollow={myfollow}  activeUser={activeUser}/>
+                <OtherFollower myfollow={myfollow} activeUser={activeUser} />
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <OtherFollowing myfollowing={myfollowing}  activeUser={activeUser}/>
+                <OtherFollowing myfollowing={myfollowing} activeUser={activeUser} />
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ import OtherUserFeeds from './OtherUserFeeds'
 
 
 
-const OtherFeeds = ({ created_on, userImg, post }) => {
+const OtherFeeds = ({ created_on, userImg, post, postImage }) => {
   const [timeAgo, setTimeAgo] = useState('');
   useEffect(() => {
 
@@ -51,33 +51,19 @@ const OtherFeeds = ({ created_on, userImg, post }) => {
     <>
       {
         post.length > 0 ?
-          <>
+          <div className='profile-page'>
             {
               post.map((post, index) => (
-                <OtherUserFeeds id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index} avatar={userImg} />
+                <OtherUserFeeds id={index} name={post.userName} tweet={post.tweet} created_on={post.createdAt} user_id={post.user_id} tweetId={post._id} key={index} avatar={userImg} postImage={post.postImage} />
               ))
             }
-          </>
+          </div>
           :
 
           <div className='text-center'>
             <h3 className='my-3 title-secondary mb-0'>No tweet to show</h3>
           </div>
       }
-      {/* <li className="flex justify-between gap-x-6 py-5 position-relative" key={id}>
-        <div className="flex min-w-0 gap-x-4 profile-img">
-          <Link to={`/${user_id}`}>
-            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={userImg === null ? deImg : `${BASE_URL}/${userImg}`} alt="" />
-          </Link>
-          <div className="min-w-0 flex-auto">
-            <p className="text-sm font-semibold leading-6 text-gray-900">{name}</p>
-            <p className="mt-1 text-xs leading-5 text-gray-500">{tweet}</p>
-          </div>
-        </div>
-        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-          <p className="mt-1 text-xs leading-5 text-gray-500"><time>{timeAgo}</time></p>
-        </div>
-      </li> */}
     </>
   )
 }
