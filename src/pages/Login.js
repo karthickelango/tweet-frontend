@@ -53,7 +53,7 @@ export const Login = () => {
         <div className="" style={{ maxWidth: '80%', margin: '0 auto', border: 'none' }}>
           <div className="row g-0">
             <h2 className='b-logo'>Tweet</h2>
-            <div className="col-md-4 align-content-center" style={{}}>
+            <div className="col-md-4 align-content-center aic">
               <div className="card-body">
                 <h3 className='my-3 title mb-0'>Login</h3>
                 {
@@ -74,7 +74,7 @@ export const Login = () => {
                   <button className='btn primary-btn text-center' onClick={() => handelLogin()}>Login</button>
                 </div>
                 <div className='my-3 label-item text-center'>
-                  Don't have a account ?
+                  Don't have an account ?
                   <Link to="/signup" className='text-color-primary ps-2'>Create one</Link>
                 </div>
               </div>

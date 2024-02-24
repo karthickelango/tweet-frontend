@@ -36,7 +36,7 @@ export const ForgetPassword = () => {
         <div className="" style={{ maxWidth: '80%', margin: '0 auto', border: 'none' }}>
           <div className="row g-0">
             <h2 className='b-logo'>Tweet</h2>
-            <div className="col-md-4 align-content-center" style={{}}>
+            <div className="col-md-4 align-content-center aic">
               <div className="card-body">
                 <h3 className='my-3 title mb-0'>Reset your password</h3>
                 {
