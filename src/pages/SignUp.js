@@ -69,7 +69,7 @@ export const SignUp = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-8 align-content-center1">
+                        <div className="col-md-8 align-content-center1 dis-mob-none">
                             <img src={LogInImg} className="img-fluid rounded-start" alt="..." />
                         </div>
                     </div>

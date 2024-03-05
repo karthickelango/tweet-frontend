@@ -70,7 +70,7 @@ const OtherUsers = ({ id }) => {
                       <p className="mt-1 truncate text-xs leading-5 text-gray-500">Following</p>
                     </div>
                   </div>
-                  <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                  <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                     <div onClick={() => handelFollow(activeUser, user._id)} className='btn primary-btn'>Follow</div>
                   </div>
                 </li>

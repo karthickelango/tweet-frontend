@@ -67,7 +67,7 @@ const UserFeeds = ({ name, tweet, created_on, user_id, id, tweetId, avatar }) =>
           </p>
           <p className="mt-1 text-xs leading-5 text-gray-500">{tweet}</p>
         </div>
-        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
           <p className="mt-1 text-xs leading-5 text-gray-500"><time>{timeAgo}</time></p>
         </div>
         <div className='option-icons'>

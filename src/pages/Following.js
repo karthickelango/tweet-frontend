@@ -44,7 +44,7 @@ const Following = ({ myfollowing, activeUser, noImg, follower }) => {
                         </div>
                         {
                           user.followerList.filter(obj => activeUser.includes(obj.followerId)).map(x => (
-                            <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                            <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                               <div className='btn secondary-btn' onClick={() => handelUnfollow(x._id)}>following</div>
                             </div>
                           ))

@@ -114,7 +114,7 @@ const Account = () => {
                     <span className="mt-1 text-xs leading-5 text-gray-500 w-100">Following: {myfollowing.length}</span>
                   </div>
                 </div>
-                <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                 </div>
               </li>
             </ul>

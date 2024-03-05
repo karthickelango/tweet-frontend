@@ -50,10 +50,10 @@ const Followbtn = ({ myId, followId, activeUser, allUser, status }) => {
         <>
             {
                 foundFollower ?
-                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                    <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                         <div  className='btn secondary-btn'>following</div>
                     </div> :
-                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                    <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                         <div onClick={() => handelFollow(myId, followId)} className='btn primary-btn'>Follow</div>
                     </div>
             }
